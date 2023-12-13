@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <script src="https://unpkg.com/htmx.org@1.9.9" integrity="sha384-QFjmbokDn2DjBjq+fM+8LUIVrAgqcNW2s0PjAxHETgRn9l4fvX31ZxDxvwQnyMOX" crossorigin="anonymous"></script>
+
+</html>
+<body>
+    <h1>Home</h1>
+    <p>Home page content goes here.</p>
+
+    <ul id="films-list">
+    {{ range .Films }}
+        {{ block "film-list-element" .}}
+            <li>{{ .Title }} - {{ .Director }}</li>
+        {{ end }}
+    {{ end }}
+
+    </ul>
+
+    <form hx-post="/add-film" hx-target="#films-list" hx-swap="beforeend">
+        <input type="text" name="title" placeholder="Title">
+        <input type="text" name="director" placeholder="Director">
+        <input type="submit" value="Add">
+    </form>
+</body>
